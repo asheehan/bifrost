@@ -5,7 +5,7 @@ defmodule Bifrost.Events.Event do
   schema "events" do
     field :name, :string
     field :slug, :string
-    field :user_id, :integer
+    belongs_to :user, Bifrost.Accounts.User
 
     timestamps(type: :utc_datetime)
   end
