@@ -50,7 +50,6 @@ erl_crash.dump
 
 # Editor and IDE files
 .elixir_ls/
-.idea/
 *.swp
 *.swo
 *~
@@ -61,12 +60,6 @@ erl_crash.dump
 # OS files
 .DS_Store
 Thumbs.db
-
-# Mix lock file merging
-# mix.lock
-
-# Phoenix live reload
-phoenix_tmp/
 
 # Phoenix digested assets
 /priv/static/
