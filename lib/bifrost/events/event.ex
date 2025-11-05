@@ -4,7 +4,7 @@ defmodule Bifrost.Events.Event do
 
   schema "events" do
     field :name, :string
-    field :slug, Ecto.UUID
+    field :slug, :string
     field :user_id, :integer
 
     timestamps(type: :utc_datetime)
@@ -20,6 +20,8 @@ defmodule Bifrost.Events.Event do
   end
 
   defp generate_slug(%Ecto.Changeset{data: %{slug: nil}} = changeset) do
+    # Generate UUID as a string for the slug
+    # This allows for custom slugs in the future (paid feature)
     put_change(changeset, :slug, Ecto.UUID.generate())
   end
 
