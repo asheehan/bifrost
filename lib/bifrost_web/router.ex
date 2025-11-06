@@ -21,6 +21,9 @@ defmodule BifrostWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :home
+
+    # Guest upload page - no authentication required
+    live "/events/:slug/upload", GuestUploadLive, :upload
   end
 
   # Other scopes may use custom stacks.

@@ -1,0 +1,86 @@
+<div class="min-h-screen flex flex-col">
+  <%= if @event do %>
+    <!-- Header -->
+    <div class="bg-primary text-primary-content p-6 text-center">
+      <h1 class="text-2xl font-bold mb-2">{@event.name}</h1>
+      <p class="text-sm opacity-90">Share your photos and videos</p>
+    </div>
+    
+<!-- Main Content -->
+    <div class="flex-1 flex flex-col items-center justify-center p-6">
+      <div class="w-full max-w-md space-y-6">
+        <!-- Instructions Card -->
+        <div class="card bg-base-200 shadow-lg">
+          <div class="card-body text-center">
+            <h2 class="card-title justify-center text-xl mb-4">
+              📸 Welcome!
+            </h2>
+            <div class="space-y-3 text-sm text-base-content/80">
+              <p>
+                <strong>1.</strong> Tap the upload button below
+              </p>
+              <p>
+                <strong>2.</strong> Select photos or videos from your device
+              </p>
+              <p>
+                <strong>3.</strong> Your uploads will appear in the event gallery
+              </p>
+            </div>
+          </div>
+        </div>
+        
+<!-- Upload Button (Placeholder for now) -->
+        <div class="text-center">
+          <button
+            class="btn btn-primary btn-lg w-full"
+            phx-click="prepare_upload"
+            disabled
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-6 w-6 mr-2"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"
+              />
+            </svg>
+            Upload Photos & Videos
+          </button>
+          <p class="mt-3 text-xs text-base-content/60">
+            (Upload functionality coming in Issue #8)
+          </p>
+        </div>
+        
+<!-- Info -->
+        <div class="text-center text-xs text-base-content/60">
+          <p>No account needed • All uploads are private to this event</p>
+        </div>
+      </div>
+    </div>
+    
+<!-- Footer -->
+    <div class="p-4 text-center text-xs text-base-content/50">
+      <p>Powered by Bifrost Photo Sharing</p>
+    </div>
+  <% else %>
+    <!-- Event Not Found -->
+    <div class="flex-1 flex flex-col items-center justify-center p-6">
+      <div class="card bg-base-200 shadow-lg max-w-md">
+        <div class="card-body text-center">
+          <h2 class="card-title justify-center text-xl mb-2">
+            Event Not Found
+          </h2>
+          <p class="text-sm text-base-content/70">
+            This event doesn't exist or may have been deleted.
+          </p>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
