@@ -74,21 +74,21 @@
 
 ---
 
-### Issue #5: QR Code Generation 📱
+### Issue #5: QR Code Generation ✅
 
-**Status**: Not Started
+**Status**: Completed
 **Priority**: High
 **Assignee**: Claude
 
 **Tasks**:
 
-- [ ] Add `eqrcode` dependency to mix.exs
-- [ ] Create QR code generation function
-- [ ] Display QR code on event show page
-- [ ] Include event URL in QR code (guest landing page)
-- [ ] Add download QR code option
+- [x] Add `eqrcode` dependency to mix.exs
+- [x] Create QR code generation function
+- [x] Display QR code on event show page
+- [x] Include event URL in QR code (guest landing page)
+- [x] Add download QR code option
 
-**Notes**: QR code should encode the guest upload URL: `/events/{slug}/upload`
+**Notes**: QR code encodes the guest upload URL: `/events/{slug}/upload`. Event show page displays QR code as SVG and provides PNG download. All 113 tests passing.
 
 ---
 
