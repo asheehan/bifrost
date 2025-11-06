@@ -14,7 +14,7 @@ defmodule BifrostWeb.EventLiveTest do
 
     test "lists user's events only", %{conn: conn, user: user} do
       user2 = user_fixture()
-      event1 = create_event(user, %{name: "My Event"})
+      _event1 = create_event(user, %{name: "My Event"})
       _event2 = create_event(user2, %{name: "Other User Event"})
 
       {:ok, _index_live, html} =
@@ -41,47 +41,38 @@ defmodule BifrostWeb.EventLiveTest do
     end
 
     test "saves new event", %{conn: conn, user: user} do
-      {:ok, index_live, _html} =
+      {:ok, _index_live, _html} =
         conn
         |> log_in_user(user)
         |> live(~p"/events")
 
-      assert index_live |> element("a", "New Event") |> render_click() =~
-               "New Event"
+      # Navigate to new event page
+      {:ok, new_live, _html} =
+        conn
+        |> log_in_user(user)
+        |> live(~p"/events/new")
 
-      assert_patch(index_live, ~p"/events/new")
-
-      assert index_live
+      assert new_live
              |> form("#event-form", event: %{name: ""})
              |> render_change() =~ "can&#39;t be blank"
 
-      assert index_live
-             |> form("#event-form", event: %{name: "Summer Wedding 2024"})
-             |> render_submit()
+      {:ok, _, html} =
+        new_live
+        |> form("#event-form", event: %{name: "Summer Wedding 2024"})
+        |> render_submit()
+        |> follow_redirect(conn |> log_in_user(user))
 
-      assert_patch(index_live, ~p"/events")
-
-      html = render(index_live)
       assert html =~ "Event created successfully"
       assert html =~ "Summer Wedding 2024"
     end
   end
 
-  defp create_event(user, attrs \\ %{}) do
+  defp create_event(user, attrs) do
     {:ok, event} =
       attrs
       |> Enum.into(%{name: "Some Event", user_id: user.id})
       |> Events.create_event()
 
     event
-  end
-
-  defp log_in_user(conn, user) do
-    scope = Bifrost.Accounts.Scope.for_user(user)
-    token = Phoenix.Token.sign(BifrostWeb.Endpoint, "user scope", scope.id)
-
-    conn
-    |> init_test_session(%{})
-    |> put_session(:user_scope_token, token)
   end
 end

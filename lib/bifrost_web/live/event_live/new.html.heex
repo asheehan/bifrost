@@ -1,0 +1,22 @@
+<div class="mx-auto max-w-2xl">
+  <.header>
+    New Event
+    <:subtitle>Create a new event for sharing photos</:subtitle>
+  </.header>
+
+  <.form :let={f} for={@changeset} id="event-form" phx-change="validate" phx-submit="save">
+    <.input field={f[:name]} type="text" label="Event Name" required />
+
+    <div class="mt-2 flex items-center gap-4">
+      <.button phx-disable-with="Creating..." class="btn btn-primary">
+        Create Event
+      </.button>
+      <.link
+        navigate={~p"/events"}
+        class="text-sm font-semibold leading-6 text-zinc-900 hover:text-zinc-700"
+      >
+        Cancel
+      </.link>
+    </div>
+  </.form>
+</div>
