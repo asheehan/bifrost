@@ -1,0 +1,75 @@
+<div class="mx-auto max-w-4xl">
+  <.header>
+    {@event.name}
+    <:subtitle>Event slug: {@event.slug}</:subtitle>
+    <:actions>
+      <.link navigate={~p"/events"}>
+        <.button class="btn btn-ghost">Back to Events</.button>
+      </.link>
+    </:actions>
+  </.header>
+
+  <div class="mt-8 grid grid-cols-1 gap-8 lg:grid-cols-2">
+    <div class="card bg-base-200">
+      <div class="card-body">
+        <h2 class="card-title">Guest Upload QR Code</h2>
+        <p class="text-sm text-base-content/70">
+          Print this QR code or share it with guests so they can upload photos to this event.
+        </p>
+
+        <div class="mt-4 flex justify-center bg-white p-6 rounded-lg">
+          {Phoenix.HTML.raw(@qr_svg)}
+        </div>
+
+        <div class="card-actions justify-end mt-4">
+          <.link href={~p"/events/#{@event.slug}/qr-code.png"} download>
+            <.button class="btn btn-primary">Download QR Code</.button>
+          </.link>
+        </div>
+      </div>
+    </div>
+
+    <div class="card bg-base-200">
+      <div class="card-body">
+        <h2 class="card-title">Upload URL</h2>
+        <p class="text-sm text-base-content/70">
+          Guests can visit this URL to upload photos:
+        </p>
+
+        <div class="mt-4">
+          <input
+            type="text"
+            readonly
+            value={"#{@base_url}/events/#{@event.slug}/upload"}
+            class="input input-bordered w-full"
+            onclick="this.select()"
+          />
+        </div>
+
+        <p class="mt-2 text-xs text-base-content/60">
+          Click to select and copy the URL
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="mt-8 card bg-base-200">
+    <div class="card-body">
+      <h2 class="card-title">Event Details</h2>
+      <dl class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+        <div>
+          <dt class="text-sm font-medium text-base-content/70">Created</dt>
+          <dd class="mt-1 text-sm">
+            {Calendar.strftime(@event.inserted_at, "%B %d, %Y at %I:%M %p")}
+          </dd>
+        </div>
+        <div>
+          <dt class="text-sm font-medium text-base-content/70">Last Updated</dt>
+          <dd class="mt-1 text-sm">
+            {Calendar.strftime(@event.updated_at, "%B %d, %Y at %I:%M %p")}
+          </dd>
+        </div>
+      </dl>
+    </div>
+  </div>
+</div>

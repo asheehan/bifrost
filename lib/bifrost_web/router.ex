@@ -67,6 +67,8 @@ defmodule BifrostWeb.Router do
 
     live "/events", EventLive.Index, :index
     live "/events/new", EventLive.New, :new
+    live "/events/:slug", EventLive.Show, :show
+    get "/events/:slug/qr-code.png", EventQRCodeController, :download
   end
 
   scope "/", BifrostWeb do

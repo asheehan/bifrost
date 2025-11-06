@@ -11,4 +11,9 @@
   <:col :let={event} label="Name">{event.name}</:col>
   <:col :let={event} label="Slug">{event.slug}</:col>
   <:col :let={event} label="Created">{Calendar.strftime(event.inserted_at, "%b %d, %Y")}</:col>
+  <:col :let={event} label="">
+    <.link navigate={~p"/events/#{event.slug}"} class="btn btn-sm btn-ghost">
+      View QR Code
+    </.link>
+  </:col>
 </.table>

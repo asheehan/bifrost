@@ -55,6 +55,22 @@ defmodule Bifrost.Events do
   @doc """
   Gets a single event by slug.
 
+  Returns nil if the Event does not exist.
+
+  ## Examples
+
+      iex> get_event_by_slug("550e8400-e29b-41d4-a716-446655440000")
+      %Event{}
+
+      iex> get_event_by_slug("invalid-uuid")
+      nil
+
+  """
+  def get_event_by_slug(slug), do: Repo.get_by(Event, slug: slug)
+
+  @doc """
+  Gets a single event by slug.
+
   Raises `Ecto.NoResultsError` if the Event does not exist.
 
   ## Examples
