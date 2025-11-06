@@ -94,21 +94,23 @@
 
 ## Day 3-4: Guest Upload Flow
 
-### Issue #6: Cloudflare R2 Setup ☁️
+### Issue #6: Cloudflare R2 Setup ✅
 
-**Status**: Not Started
+**Status**: Completed (Code Ready - User Setup Required)
 **Priority**: Critical
 **Assignee**: User + Claude
 
 **Tasks**:
 
-- [ ] Create Cloudflare R2 bucket
-- [ ] Get R2 credentials (access key, secret key)
-- [ ] Configure R2 in Phoenix config
-- [ ] Add ExAws and ExAws.S3 dependencies
-- [ ] Test connection to R2
+- [x] Add ExAws and ExAws.S3 dependencies
+- [x] Configure R2 in Phoenix config
+- [x] Create Storage helper module with R2 functions
+- [ ] **User Action Required**: Create Cloudflare R2 bucket (see R2_SETUP.md)
+- [ ] **User Action Required**: Get R2 credentials (see R2_SETUP.md)
+- [ ] **User Action Required**: Set environment variables (see R2_SETUP.md)
+- [ ] **User Action Required**: Test connection with `Bifrost.Storage.test_connection()`
 
-**Notes**: User needs Cloudflare account. R2 uses S3-compatible API.
+**Notes**: Code implementation complete. User needs to follow R2_SETUP.md to create Cloudflare account, bucket, and configure credentials. R2 uses S3-compatible API via ExAws.
 
 ---
 
