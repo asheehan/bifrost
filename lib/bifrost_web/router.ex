@@ -63,6 +63,13 @@ defmodule BifrostWeb.Router do
   end
 
   scope "/", BifrostWeb do
+    pipe_through [:browser, :require_authenticated_scope]
+
+    live "/events", EventLive.Index, :index
+    live "/events/new", EventLive.Index, :new
+  end
+
+  scope "/", BifrostWeb do
     pipe_through [:browser]
 
     get "/users/log-in", UserSessionController, :new
