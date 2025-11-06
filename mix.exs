@@ -61,7 +61,11 @@ defmodule Bifrost.MixProject do
       {:jason, "~> 1.2"},
       {:dns_cluster, "~> 0.1.1"},
       {:bandit, "~> 1.5"},
-      {:eqrcode, "~> 0.1.10"}
+      {:eqrcode, "~> 0.1.10"},
+      {:ex_aws, "~> 2.5"},
+      {:ex_aws_s3, "~> 2.5"},
+      {:sweet_xml, "~> 0.7"},
+      {:hackney, "~> 1.20"}
     ]
   end
 

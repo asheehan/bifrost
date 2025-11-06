@@ -116,4 +116,29 @@ if config_env() == :prod do
   #     config :swoosh, :api_client, Swoosh.ApiClient.Hackney
   #
   # See https://hexdocs.pm/swoosh/Swoosh.html#module-installation for details.
+
+  # ## Configuring Cloudflare R2
+  #
+  # R2 uses S3-compatible API. You'll need to set these environment variables:
+  # - R2_ACCESS_KEY_ID: Your R2 access key ID
+  # - R2_SECRET_ACCESS_KEY: Your R2 secret access key
+  # - R2_BUCKET: Your R2 bucket name
+  # - R2_ACCOUNT_ID: Your Cloudflare account ID
+  #
+  # The R2_ENDPOINT is constructed from your account ID.
+  # Format: https://<account-id>.r2.cloudflarestorage.com
+
+  if r2_account_id = System.get_env("R2_ACCOUNT_ID") do
+    config :ex_aws, :s3,
+      access_key_id: System.get_env("R2_ACCESS_KEY_ID"),
+      secret_access_key: System.get_env("R2_SECRET_ACCESS_KEY"),
+      region: "auto",
+      # R2 endpoint format
+      host: "#{r2_account_id}.r2.cloudflarestorage.com",
+      scheme: "https://"
+
+    config :bifrost, :r2,
+      bucket: System.get_env("R2_BUCKET"),
+      public_url: System.get_env("R2_PUBLIC_URL")
+  end
 end
